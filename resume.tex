@@ -1,109 +1,166 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
-% Awesome CV LaTeX Template for CV/Resume
-%
-% This template has been downloaded from:
-% https://github.com/posquit0/Awesome-CV
-%
-% Author:
-% Claud D. Park <posquit0.bj@gmail.com>
-% http://www.posquit0.com
-%
-% Template license:
-% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
-%
-
-
-%-------------------------------------------------------------------------------
-% CONFIGURATIONS
-%-------------------------------------------------------------------------------
-% A4 paper size by default, use 'letterpaper' for US letter
 \documentclass[11pt, a4paper]{awesome-cv}
 
-% Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
-
-% Specify the location of the included fonts
 \fontdir[fonts/]
-
-% Color for highlights
-% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
-%                 awesome-nephritis, awesome-concrete, awesome-darknight
 \colorlet{awesome}{awesome-red}
-% Uncomment if you would like to specify your own color
-% \definecolor{awesome}{HTML}{CA63A8}
-
-% Colors for text
-% Uncomment if you would like to specify your own color
-% \definecolor{darktext}{HTML}{414141}
-% \definecolor{text}{HTML}{333333}
-% \definecolor{graytext}{HTML}{5D5D5D}
-% \definecolor{lighttext}{HTML}{999999}
-
-% Set false if you don't want to highlight section with awesome color
 \setbool{acvSectionColorHighlight}{true}
-
-% If you would like to change the social information separator from a pipe (|) to something else
 \renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
 
-
-%-------------------------------------------------------------------------------
-%	PERSONAL INFORMATION
-%	Comment any of the lines below if they are not required
-%-------------------------------------------------------------------------------
-% Available options: circle|rectangle,edge/noedge,left/right
-% \photo[rectangle,edge,right]{./examples/profile}
 \name{Samir}{Bettahar}
-\position{Software Engineer{\enskip\cdotp\enskip}}
-\address{42-8, Bangbae-ro 15-gil, Seocho-gu, Seoul, 00681, Rep. of KOREA}
+\position{Ingénieur Logiciel}
+\address{City, Country}
+\mobile{(+213)~000~00~00~00}
+\email{Bettahar.Samir@outlook.com}
+\github{samir1498}
+\linkedin{samir-bettahar}
 
-\mobile{(+82) 10-9030-1843}
-\email{posquit0.bj@gmail.com}
-\homepage{www.posquit0.com}
-\github{posquit0}
-\linkedin{posquit0}
-% \gitlab{gitlab-id}
-% \stackoverflow{SO-id}{SO-name}
-% \twitter{@twit}
-% \skype{skype-id}
-% \reddit{reddit-id}
-% \medium{madium-id}
-% \googlescholar{googlescholar-id}{name-to-display}
-%% \firstname and \lastname will be used
-% \googlescholar{googlescholar-id}{}
-% \extrainfo{extra informations}
-
-% \quote{``Be the change that you want to see in the world."}
-
-
-%-------------------------------------------------------------------------------
 \begin{document}
-
-% Print the header with above personal informations
-% Give optional argument to change alignment(C: center, L: left, R: right)
 \makecvheader[C]
-
-% Print the footer with 3 arguments(<left>, <center>, <right>)
-% Leave any of these blank if they are not needed
 \makecvfooter
   {\today}
-  {Samir Bettahar~~~·~~~Résumé}
+  {Samir Bettahar~~~·~~~CV}
   {\thepage}
 
+%-------------------------------------------------------------------------------
+%	FRENCH VERSION
+%-------------------------------------------------------------------------------
+
+\cvsection{Profil}
+\begin{cvparagraph}
+Ingénieur logiciel axé sur le développement backend, l'architecture logicielle propre et l'expérience développeur. Expérimenté dans la création de systèmes prêts pour la production avec TypeScript, NestJS, PostgreSQL et Docker. Également compétent en React pour le développement frontend. Passionné par le code propre, la résolution de problèmes concrets et l'amélioration continue.
+\end{cvparagraph}
+
+\cvsection{Expérience}
+\begin{cventries}
+
+  \cventry
+    {Développeur Fullstack}
+    {Startup cliente via Simplified (devenue Omnivya)}
+    {Télétravail}
+    {Fév. 2024 -- Jan. 2025}
+    {
+      \begin{cvitems}
+        \item {Développement de fonctionnalités fullstack pour une plateforme artistique avec Spring Boot et React.}
+        \item {Conception des interfaces pour les administrateurs et les clients ; création d'une landing page avec AstroJS.}
+        \item {Mise en œuvre d'une architecture logicielle propre et préparation pour la mise en production.}
+      \end{cvitems}
+    }
+
+  \vspace{1.2em}
+
+  \cventry
+    {Ingénieur Logiciel}
+    {Simplified / Omnivya}
+    {Télétravail}
+    {Jan. 2025 -- Aujourd'hui}
+    {
+      \begin{cvitems}
+        \item {Développement fullstack d'une plateforme de facturation avec NestJS, React et PostgreSQL.}
+        \item {Implémentation de fonctionnalités conformes aux réglementations légales.}
+        \item {Refactorisation et modularisation du code, et ajout de tests automatisés approfondis.}
+      \end{cvitems}
+    }
+
+\end{cventries}
+
+\cvsection{Formation}
+\begin{cventries}
+
+  \cventry
+    {Master en Génie Logiciel (IL)}
+    {Université Saad Dahlab de Blida}
+    {Blida, Algérie}
+    {Jan. 2025 -- Aujourd'hui}
+    {
+      \begin{cvitems}
+        \item {Formation axée sur l'architecture logicielle, les méthodologies de développement logiciel, et le développement full‑stack.}
+      \end{cvitems}
+    }
+
+  \cventry
+    {Licence en Systèmes d’Information et Génie Logiciel (ISIL)}
+    {Université Saad Dahlab de Blida}
+    {Blida, Algérie}
+    {2017 -- 2020}
+    {
+      \begin{cvitems}
+        \item {Bases solides en informatique, algorithmes, bases de données et programmation orientée objet.}
+      \end{cvitems}
+    }
+
+\end{cventries}
+
+\newpage
 
 %-------------------------------------------------------------------------------
-%	CV/RESUME CONTENT
-%	Each section is imported separately, open each file in turn to modify content
+%	ENGLISH VERSION
 %-------------------------------------------------------------------------------
-\input{resume/summary.tex}
-\input{resume/experience.tex}
-% \input{resume/honors.tex}
-% \input{resume/presentation.tex}
-% \input{resume/writing.tex}
-% \input{resume/committees.tex}
-\input{resume/education.tex}
-\input{resume/extracurricular.tex}
 
+\cvsection{Summary}
+\begin{cvparagraph}
+Software engineer focused on backend development, clean architecture, and developer experience. Skilled in building production-ready systems with TypeScript, NestJS, PostgreSQL, and Docker. Also experienced in React for frontend work. Passionate about writing clean code, solving real problems, and continuous improvement.
+\end{cvparagraph}
 
-%-------------------------------------------------------------------------------
+\cvsection{Experience}
+\begin{cventries}
+
+  \cventry
+    {Fullstack Developer (Contract)}
+    {Startup Client via Simplified (now Omnivya)}
+    {Remote}
+    {Feb. 2024 -- Jan. 2025}
+    {
+      \begin{cvitems}
+        \item {Built fullstack features for an art-focused web platform using Spring Boot and React.}
+        \item {Delivered both admin and client-facing UIs; implemented landing page with AstroJS.}
+        \item {Applied clean architecture and ensured production readiness.}
+      \end{cvitems}
+    }
+
+  \vspace{1.2em}
+
+  \cventry
+    {Software Engineer}
+    {Simplified / Omnivya}
+    {Remote}
+    {Jan. 2025 -- Present}
+    {
+      \begin{cvitems}
+        \item {Contributed to fullstack development of a billing platform using NestJS, React, and PostgreSQL.}
+        \item {Built legal-compliant features.}
+        \item {Improved architecture by modularizing codebase and writing extensive automated tests.}
+      \end{cvitems}
+    }
+
+\end{cventries}
+
+\cvsection{Education}
+\begin{cventries}
+
+  \cventry
+    {Master’s Degree in Software Engineering (IL)}
+    {University of Saad Dahlab Blida}
+    {Blida, Algeria}
+    {Jan. 2025 -- Present}
+    {
+      \begin{cvitems}
+        \item {Graduated with a focus on software architecture, software engineering methodologies, and full‑stack development.}
+      \end{cvitems}
+    }
+
+  \cventry
+    {Bachelor’s Degree in Information Systems and Software Engineering (ISIL)}
+    {University of Saad Dahlab Blida}
+    {Blida, Algeria}
+    {2017 -- 2020}
+    {
+      \begin{cvitems}
+        \item {Solid foundation in computer science, algorithms, databases, and object‑oriented programming.}
+      \end{cvitems}
+    }
+
+\end{cventries}
+
 \end{document}
