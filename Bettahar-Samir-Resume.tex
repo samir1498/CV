@@ -1,0 +1,41 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+\documentclass[11pt, a4paper]{awesome-cv}
+
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+\fontdir[fonts/]
+\colorlet{awesome}{awesome-red}
+\setbool{acvSectionColorHighlight}{true}
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+% === Shared Info ===
+\name{Bettahar}{Samir}
+\mobile{(+213)~000~00~00~00}
+\email{Bettahar.Samir@outlook.com}
+\github{samir1498}
+\linkedin{samir-bettahar}
+\homepage{samir-bettahar-portfolio.vercel.app/en/}
+
+\begin{document}
+
+%========================
+% ENGLISH VERSION
+%========================
+% Fix redefinition issues
+\makeatletter
+\let\drawphoto\relax
+\let\headertextwidth\relax
+\let\headerphotowidth\relax
+\makeatother
+
+\position{Software Engineer}
+% \address{City, Country}
+\makecvheader[C]
+\makecvfooter{\today}{Samir Bettahar~~~·~~~CV (EN)}{\thepage}
+
+\input{sections/en/profile}
+\input{sections/en/experience}
+\input{sections/en/education}
+\input{sections/en/skills}
+
+\end{document}
