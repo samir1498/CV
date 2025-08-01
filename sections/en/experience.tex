@@ -6,54 +6,52 @@
     {Developer}
     {Omnivya}
     {Remote}
-    {Feb. 2024 -- Present}
+    {Feb. 2024 -- Aug. 2025}
+    {As a developer, I worked on two distinct full-stack projects: a multi-tenant SaaS product (Mission 2) and a web platform (Mission 1), contributing across the frontend, backend, authentication, and testing.}
+    \space
+    
     {
       \begin{cvitems}
-        \item {\textbf{Mission 1: Platform Development (Feb. 2024 -- Jan. 2025)}}
+        \item {\textbf{SaaS Product Development (Mission 2, Jan. 2025 -- Aug. 2025)}}
         \begin{itemize}
           \item {\textbf{Frontend}}
           \begin{itemize}
-            \item {Developed client and admin interfaces using React.js with TanStack Router.}
-            \item {Integrated a 3D component using Three.js.}
-            \item {Built a performant landing page with AstroJS.}
+            \item {Rebuilt the frontend from SvelteKit to AstroJS + React for improved maintainability and ecosystem support.}
+            \item {Built interactive and stateful UIs with React.}
           \end{itemize}
+
           \item {\textbf{Backend}}
-          \begin{itemize}
-            \item {Built a REST API with Spring Boot using Clean Architecture.}
-            \item {Handled data persistence with Spring Data JPA and migrations via Flyway.}
-            \item {Secured API with Spring Security and Zitadel.}
+            \begin{itemize}
+            \item {Replaced PocketBase with a custom NestJS API using a modular architecture.}
+            \item {Cached Azure-hosted image blobs and expensive TypeORM queries using Redis.}
+            \item {Managed PostgreSQL schema migrations via the TypeORM CLI.}
           \end{itemize}
-          \item {\textbf{Observability \& Performance}}
-          \begin{itemize}
-            \item {Integrated Prometheus and OpenTelemetry.}
-            \item {Optimized memory in Kubernetes with GraalVM native compilation.}
-          \end{itemize}
-          \item {\textbf{Specific Work}}
-          \begin{itemize}
-            \item {Reverse engineered a large Three.js script into a dynamic Go API.}
-          \end{itemize}
-        \end{itemize}
-        \item {\textbf{Mission 2: SaaS Product Development (Jan. 2025 -- Present)}}
-        \begin{itemize}
-          \item {\textbf{Frontend}}
-          \begin{itemize}
-            \item {Migrated from Svelte to AstroJS with React.}
-            \item {Chose React Query and Zustand over Redux.}
-            \item {Built responsive and stable interfaces.}
-          \end{itemize}
-          \item {\textbf{Backend}}
-          \begin{itemize}
-            \item {Migrated backend from PocketBase to custom NestJS API.}
-            \item {Handled migrations with TypeORM CLI.}
-          \end{itemize}
+
           \item {\textbf{Authentication}}
           \begin{itemize}
-            \item {Migrated from Clerk to self-hosted BetterAuth.}
+            \item {Replaced Clerk with BetterAuth, a self-hosted auth system using the main application database.}
           \end{itemize}
           \item {\textbf{Quality and Testing}}
           \begin{itemize}
-            \item {Wrote unit/integration tests with Vitest and TestContainers.}
-            \item {Automated E2E tests with Playwright.}
+            \item {Wrote unit and integration tests with Vitest and TestContainers.}
+            \item {Implemented end-to-end tests with Playwright.}
+          \end{itemize}
+        \end{itemize}
+
+        \item {\textbf{Platform Development (Mission 1, Feb. 2024 -- Jan. 2025)}}
+        \begin{itemize}
+          \item {\textbf{Frontend}}
+          \begin{itemize}
+            \item {Built client/admin interfaces with React and TanStack Router.}
+            \item {Developed a fast, SEO-optimized landing page with AstroJS.}
+          \end{itemize}
+
+          \item {\textbf{Backend}}
+          \begin{itemize}
+            \item {Built REST APIs using Spring Boot and Clean Architecture.}
+            \item {Used Spring Data JPA and Flyway for persistence and migrations.}
+            \item {Secured services with Spring Security and Zitadel.}
+            \item {Built a small Go service to expose runtime configs for the 3D platform.}
           \end{itemize}
         \end{itemize}
       \end{cvitems}
