@@ -72,9 +72,16 @@
 \renewcommand*{\cvskill}[2]{%
 	\skilltypestyle{#1} & \skillsetstyle{#2} \\
 }
+% Toggle public version (hides sensitive info like phone/email)
+\newif\ifpublic
+\ifdefined\makePublic \publictrue \fi
+
 \name{\textarabic{بطاهر}}{\textarabic{سمير}}
-\mobile{\textenglish{(+213) 000 00 00 00}}
-\email{Bettahar.Samir@outlook.com}
+\ifpublic
+\else
+  \mobile{\textenglish{(+213) 000 00 00 00}}
+  \email{Bettahar.Samir@outlook.com}
+\fi
 \github{samir1498}
 \linkedin{samir-bettahar}
 \homepage{samir-bettahar.dev}
