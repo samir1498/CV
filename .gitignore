@@ -1,3 +1,7 @@
 .DS_Store
 output
 *.log
+*.out
+*.aux
+*.pdf
+*.gz
