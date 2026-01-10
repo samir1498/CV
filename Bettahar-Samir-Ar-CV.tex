@@ -1,0 +1,99 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+%!TEX outputDirectory = output/ar
+\documentclass[11pt, a4paper]{awesome-cv}
+\hypersetup{pageanchor=true}
+
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+
+% Arabic Support
+\usepackage{polyglossia}
+\setmainlanguage[numerals=maghrib]{arabic}
+\setotherlanguage{english}
+
+% Set Arabic fonts with Italic mapped to Regular (since FreeSerif Italic lacks Arabic glyphs)
+\newfontfamily\arabicfont[Script=Arabic, Scale=1.1, ItalicFont=FreeSerif]{FreeSerif}
+\newfontfamily\arabicfontsf[Script=Arabic, Scale=1.1, ItalicFont=FreeSerif]{FreeSerif}
+\newfontfamily\arabicfonttt[Script=Arabic, Scale=1.1, ItalicFont=FreeSerif]{FreeSerif}
+
+\colorlet{awesome}{awesome-red}
+\setbool{acvSectionColorHighlight}{false}
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+% Override awesome-cv fonts to use Arabic font (FreeSerif) everywhere
+\let\headerfont\arabicfont
+\let\headerfontlight\arabicfont
+\let\footerfont\arabicfont
+\let\bodyfont\arabicfont
+\let\bodyfontlight\arabicfont
+
+% Redefine sectionstyle to avoid parsing issues with Arabic text
+\renewcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text} #1}}
+
+% Redefine cvsection to ensure RTL direction (Line Left, Text Right)
+% Swap order: Line first, then Title. In RTL context, this places title on Right.
+\renewcommand{\cvsection}[1]{%
+  \vspace{\acvSectionTopSkip}
+  \phantomsection
+  \color{gray}\vhrulefill{0.9pt}\hspace{0.5em}\sectionstyle{#1}%
+}
+
+
+% Redefine cventry to match user preference:
+% Single column, ALL elements aligned to the Right (R = raggedleft = Physical Right)
+\renewcommand*{\cventry}[5]{%
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} R{\textwidth}}
+    \entrytitlestyle{#2} \\
+    \entrypositionstyle{#1} \\
+    {\entrylocationstyle{#3} \ \textbullet\ \entrydatestyle{#4}} \\
+    \descriptionstyle{#5}
+  \end{tabular*}%
+}
+
+% Redefine cvskills to match RTL layout and prevent overflow
+% Col 1 (Right): Label (Fixed 4cm) -> R
+% Col 2 (Left): Skills (Remainder) -> R (Align to Right, close to label)
+\renewenvironment{cvskills}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2.0mm}
+  \begin{center}
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} R{4cm} R{\textwidth - 4.2cm}}
+}{%
+    \end{tabular*}
+  \end{center}
+}
+
+% Redefine cvskill to align with new environment
+\renewcommand*{\cvskill}[2]{%
+	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+}
+\name{\textarabic{بطاهر}}{\textarabic{سمير}}
+\mobile{\textenglish{(+213) 000 00 00 00}}
+\email{Bettahar.Samir@outlook.com}
+\github{samir1498}
+\linkedin{samir-bettahar}
+\address{\textarabic{ذراع الميزان، مدينة، البلد}}
+\position{\textarabic{مهندس برمجيات}}
+
+\begin{document}
+
+% Mirroring layout for RTL
+%\makeatletter
+%\def\@sectionalignment{r}
+%\makeatother
+
+\makecvheader[C]
+\makecvfooter{\today}{\textarabic{سمير بطاهر}~~~·~~~CV}{\thepage}
+
+% Content
+\input{sections/ar/profile}
+\input{sections/ar/experience}
+\input{sections/ar/education}
+\input{sections/ar/skills}
+
+\end{document}
