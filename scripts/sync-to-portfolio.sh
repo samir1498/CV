@@ -14,23 +14,23 @@ echo "🚀 Building CVs and syncing to Portfolio..."
 # Build CVs (using existing Makefile)
 make clean
 
-# Build Public Versions (with \makePublic defined)
-echo "Building Public (Stripped) Versions..."
+# Build CVs
+echo "Building CV versions..."
 
 # English
 mkdir -p output/en
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/en "\def\makePublic{1} \input{Bettahar-Samir-Resume.tex}"
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/en "\def\makePublic{1} \input{Bettahar-Samir-Resume.tex}"
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/en Bettahar-Samir-Resume.tex
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/en Bettahar-Samir-Resume.tex
 
 # French
 mkdir -p output/fr
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/fr "\def\makePublic{1} \input{Bettahar-Samir-CV.tex}"
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/fr "\def\makePublic{1} \input{Bettahar-Samir-CV.tex}"
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/fr Bettahar-Samir-CV.tex
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/fr Bettahar-Samir-CV.tex
 
 # Arabic
 mkdir -p output/ar
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/ar "\def\makePublic{1} \input{Bettahar-Samir-Ar-CV.tex}"
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/ar "\def\makePublic{1} \input{Bettahar-Samir-Ar-CV.tex}"
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/ar Bettahar-Samir-Ar-CV.tex
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/ar Bettahar-Samir-Ar-CV.tex
 
 # Copy files
 echo "📂 Copying files to $PORTFOLIO_CV_DIR..."

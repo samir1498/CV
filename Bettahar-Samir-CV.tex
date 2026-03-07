@@ -6,24 +6,18 @@
 
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
 \fontdir[fonts/]
-\colorlet{awesome}{awesome-red}
+\colorlet{awesome}{awesome-skyblue}
 \setbool{acvSectionColorHighlight}{true}
 \renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
 
-% Toggle public version (hides sensitive info like phone/email)
-\newif\ifpublic
-\ifdefined\makePublic \publictrue \fi
-
 % === Shared Info ===
 \name{Bettahar}{Samir}
-\ifpublic
-\else
-  \mobile{(+213)~000~00~00~00}
-  \email{Bettahar.Samir@outlook.com}
-\fi
+\email{contact@samir-bettahar.dev}
+\extrainfo{\href{https://wa.me/213000000000}{\faWhatsapp\acvHeaderIconSep(+213)~000~00~00~00}}
 \github{samir1498}
 \linkedin{samir-bettahar}
 \homepage{samir-bettahar.dev}
+\photo[circle,edge,right]{me.jpeg}
 
 \begin{document}
 
@@ -52,34 +46,33 @@
 \cvsection{Projets}
 
 \begin{cventries}
-    \cventry
-    {Projet de Licence – Détection de la Maladie de Parkinson (Python, Machine Learning)}
-    {Université Saad Dahlab de Blida}
-    {Blida, Algérie}
-    {2020}
-    {
-        \begin{cvitems}
-            \item {Développement d’un système d’aide au diagnostic médical en \textbf{Python} basé sur l’analyse des tests graphiques \textit{spiral} et \textit{wave}.}
-            \item {Implémentation de modèles de \textbf{machine learning} (KNN, SVM, Forêts aléatoires) avec \textbf{scikit-learn}, atteignant une précision de \textbf{90\%}.}
-            \item {Traitement d’images avec \textbf{OpenCV}, extraction de caractéristiques (LBP, Haralick, moments de Hu).}
-            \item {Création d’une interface graphique \textbf{Tkinter} permettant aux médecins de tester des images et visualiser matrices de confusion et courbes ROC.}
-        \end{cvitems}
-    }
-    
-    \cventry
-    {Projet de Master – Ligne de Produits Logiciels pour l’e-Banking (Java EE, Ontologies)}
-    {Université Saad Dahlab de Blida}
-    {Blida, Algérie}
-    {2022}
-    {
-        \begin{cvitems}
-            \item {Conception et développement d’une ligne de produits logiciels permettant de générer automatiquement des applications e-Banking basées sur des \textbf{ontologies} et un \textbf{feature model}.}
-            \item {Implémentation d’un configurateur desktop en \textbf{Java Swing} pour sélectionner les fonctionnalités et générer les applications.}
-            \item {Développement d’applications web (espaces Client et Admin) avec \textbf{Java EE} (Servlets, JSP, JDBC) et déploiement sur Tomcat/Glassfish.}
-        \end{cvitems}
-    }
+	\cventry
+	{Projet de Licence – Détection de la Maladie de Parkinson (Python, Machine Learning)}
+	{Université Saad Dahlab de Blida}
+	{Blida, Algérie}
+	{2020}
+	{
+		\begin{cvitems}
+			\item {Développement d’un système d’aide au diagnostic médical en \textbf{Python} basé sur l’analyse des tests graphiques \textit{spiral} et \textit{wave}.}
+			\item {Implémentation de modèles de \textbf{machine learning} (KNN, SVM, Forêts aléatoires) avec \textbf{scikit-learn}, atteignant une précision de \textbf{90\%}.}
+			\item {Traitement d’images avec \textbf{OpenCV}, extraction de caractéristiques (LBP, Haralick, moments de Hu).}
+			\item {Création d’une interface graphique \textbf{Tkinter} permettant aux médecins de tester des images et visualiser matrices de confusion et courbes ROC.}
+		\end{cvitems}
+	}
+
+	\cventry
+	{Projet de Master – Ligne de Produits Logiciels pour l’e-Banking (Java EE, Ontologies)}
+	{Université Saad Dahlab de Blida}
+	{Blida, Algérie}
+	{2022}
+	{
+		\begin{cvitems}
+			\item {Conception et développement d’une ligne de produits logiciels permettant de générer automatiquement des applications e-Banking basées sur des \textbf{ontologies} et un \textbf{feature model}.}
+			\item {Implémentation d’un configurateur desktop en \textbf{Java Swing} pour sélectionner les fonctionnalités et générer les applications.}
+			\item {Développement d’applications web (espaces Client et Admin) avec \textbf{Java EE} (Servlets, JSP, JDBC) et déploiement sur Tomcat/Glassfish.}
+		\end{cvitems}
+	}
 \end{cventries}
-\newpage
 \input{sections/fr/skills}
 
 \end{document}
