@@ -1,38 +1,17 @@
 #!/bin/bash
 
-# Configuration
 PORTFOLIO_CV_DIR="$HOME/developer/personal/portfolio/public/cv"
 
-# Check if portfolio directory exists
 if [ ! -d "$PORTFOLIO_CV_DIR" ]; then
     echo "⚠️ Portfolio directory not found at $PORTFOLIO_CV_DIR. Skipping copy."
     exit 0
 fi
 
-echo "🚀 Building CVs and syncing to Portfolio..."
+echo "🚀 Building public CVs and syncing to Portfolio..."
 
-# Build CVs (using existing Makefile)
 make clean
+make public
 
-# Build CVs
-echo "Building CV versions..."
-
-# English
-mkdir -p output/en
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/en Bettahar-Samir-Resume.tex
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/en Bettahar-Samir-Resume.tex
-
-# French
-mkdir -p output/fr
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/fr Bettahar-Samir-CV.tex
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/fr Bettahar-Samir-CV.tex
-
-# Arabic
-mkdir -p output/ar
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/ar Bettahar-Samir-Ar-CV.tex
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=output/ar Bettahar-Samir-Ar-CV.tex
-
-# Copy files
 echo "📂 Copying files to $PORTFOLIO_CV_DIR..."
 
 cp output/en/Bettahar-Samir-Resume.pdf "$PORTFOLIO_CV_DIR/samir-bettahar-cv-en.pdf"

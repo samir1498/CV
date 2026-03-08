@@ -1,117 +1,93 @@
-<h1 align="center">
-  <a href="https://github.com/posquit0/Awesome-CV" title="AwesomeCV Documentation">
-    <img alt="AwesomeCV" src="https://github.com/posquit0/Awesome-CV/raw/master/icon.png" width="200px" height="200px" />
-  </a>
-  <br />
-  Awesome CV
-</h1>
+# Samir Bettahar CV
 
-<p align="center">
-  LaTeX template for your outstanding job application
-</p>
+LaTeX source for my multilingual CV set (English, French, Arabic), built with `awesome-cv` and published as PDF.
 
-<div align="center">
-  <a href="https://www.paypal.me/posquit0">
-    <img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-blue.svg" />
-  </a>
-  <a href="https://circleci.com/gh/posquit0/Awesome-CV">
-    <img alt="CircleCI" src="https://circleci.com/gh/posquit0/Awesome-CV.svg?style=shield" />
-  </a>
-  <a href="https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf">
-    <img alt="Example Resume" src="https://img.shields.io/badge/resume-pdf-green.svg" />
-  </a>
-  <a href="https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/cv.pdf">
-    <img alt="Example CV" src="https://img.shields.io/badge/cv-pdf-green.svg" />
-  </a>
-  <a href="https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/coverletter.pdf">
-    <img alt="Example Coverletter" src="https://img.shields.io/badge/coverletter-pdf-green.svg" />
-  </a>
-</div>
+## Repository Layout
 
-<br />
+- `Bettahar-Samir-Resume.tex`: English CV
+- `Bettahar-Samir-CV.tex`: French CV
+- `Bettahar-Samir-Ar-CV.tex`: Arabic CV
+- `sections/`: language-specific section content
+- `fonts/`: local fonts used by the template
+- `private-vars.example.tex`: template for local private values
+- `scripts/sync-to-portfolio.sh`: build + copy PDFs into `portfolio/public/cv`
+- `output/`: generated build artifacts
 
-## What is Awesome CV?
+## Requirements
 
-**Awesome CV** is LaTeX template for a **CV(Curriculum Vitae)**, **Résumé** or **Cover Letter** inspired by [Fancy CV](https://www.sharelatex.com/templates/cv-or-resume/fancy-cv). It is easy to customize your own template, especially since it is really written by a clean, semantic markup.
+- `xelatex`
+- `make`
 
-
-## Donate
-
-Please help keep this project alive! Donations are welcome and will go towards further development of this project.
-
-    PayPal: paypal.me/posquit0
-    BTC: 1Je3DxJVM2a9nTVPNo55SfQwpmxA6N2KKb
-    BCH: 1Mg1wG7PwHGrHYSWS67TsGSjo5GHEVbF16
-    ETH: 0x77ED9B4659F80205E9B9C9FB1E26EDB9904AFCC7
-    QTUM: QZT7D6m3QtTTqp7s4ZWAwLtGDsoHMMaM8E
-
-*Thank you for your support!*
-
-## Preview
-
-#### Résumé
-
-You can see [PDF](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf)
-
-| Page. 1 | Page. 2 |
-|:---:|:---:|
-| [![Résumé](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume-0.png)](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf)  | [![Résumé](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume-1.png)](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf) |
-
-#### Cover Letter
-
-You can see [PDF](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/coverletter.pdf)
-
-| Without Sections | With Sections |
-|:---:|:---:|
-| [![Cover Letter(Traditional)](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/coverletter-0.png)](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/coverletter.pdf)  | [![Cover Letter(Awesome)](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/coverletter-1.png)](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/coverletter.pdf) |
-
-
-## Quick Start
-
-* [**Edit Résumé on OverLeaf.com**](https://www.overleaf.com/latex/templates/awesome-cv/tvmzpvdjfqxp)
-* [**Edit Cover Letter on OverLeaf.com**](https://www.overleaf.com/latex/templates/awesome-cv-cover-letter/pfzzjspkthbk)
-
-**_Note:_ Above services do not guarantee up-to-date source code of Awesome CV**
-
-
-## How to Use
-
-#### Requirements
-
-A full TeX distribution is assumed.  [Various distributions for different operating systems (Windows, Mac, \*nix) are available](http://tex.stackexchange.com/q/55437) but TeX Live is recommended.
-You can [install TeX from upstream](http://tex.stackexchange.com/q/1092) (recommended; most up-to-date) or use `sudo apt-get install texlive-full` if you really want that.  (It's generally a few years behind.)
-
-#### Usage
-
-At a command prompt, run
+On Ubuntu/Debian, this usually means:
 
 ```bash
-$ xelatex {your-cv}.tex
+sudo apt-get update
+sudo apt-get install -y make texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-lang-arabic fonts-freefont-otf
 ```
 
-This should result in the creation of ``{your-cv}.pdf``
+## Build
 
+Default build is public mode.
 
-## Credit
+```bash
+make public
+```
 
-[**LaTeX**](http://www.latex-project.org) is a fantastic typesetting program that a lot of people use these days, especially the math and computer science people in academia.
+Private build includes extra contact details and photo.
 
-[**LaTeX FontAwesome**](https://github.com/furl/latex-fontawesome) is bindings for FontAwesome icons to be used in XeLaTeX.
+Before first private build:
 
-[**Roboto**](https://github.com/google/roboto) is the default font on Android and ChromeOS, and the recommended font for Google’s visual language, Material Design.
+```bash
+cp private-vars.example.tex private-vars.tex
+```
 
-[**Source Sans Pro**](https://github.com/adobe-fonts/source-sans-pro) is a set of OpenType fonts that have been designed to work well in user interface (UI) environments.
+```bash
+make private
+```
 
+Build a single language:
 
-## Contact
+```bash
+make en
+make fr
+make ar
+```
 
-You are free to take my `.tex` file and modify it to create your own resume. Please don't use my resume for anything else without my permission, though!
+Clean artifacts:
 
-If you have any questions, feel free to join me at [`#posquit0` on Freenode](irc://irc.freenode.net/posquit0) and ask away. Click [here](https://kiwiirc.com/client/irc.freenode.net/posquit0) to connect.
+```bash
+make clean
+```
 
-Good luck!
+## Privacy Modes
 
+Public mode (default):
 
-## See Also
+- Shows name, role, email alias, GitHub, LinkedIn, website
+- Hides WhatsApp number, address, photo
 
-* [Awesome Identity](https://github.com/posquit0/hugo-awesome-identity) - A single-page Hugo theme to introduce yourself.
+Private mode (`make private`):
+
+- Loads WhatsApp, address, and photo path from local `private-vars.tex` (not tracked)
+
+## Portfolio Sync
+
+Build public PDFs and copy them to the portfolio static folder:
+
+```bash
+./scripts/sync-to-portfolio.sh
+```
+
+Target folder expected:
+
+- `$HOME/developer/personal/portfolio/public/cv`
+
+## CI and Releases
+
+- Pull requests and pushes are validated by GitHub Actions build workflow.
+- Tag pushes matching `v*` create a GitHub Release and attach the generated PDF files.
+
+## License
+
+- Repository content is licensed under the MIT License (see `LICENSE`).
+- Third-party template and assets notices are listed in `THIRD_PARTY_NOTICES.md`.

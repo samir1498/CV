@@ -19,6 +19,12 @@
 \colorlet{awesome}{awesome-skyblue}
 \setbool{acvSectionColorHighlight}{false}
 \renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+\newif\ifprivatecv
+\ifdefined\isprivatecv
+\privatecvtrue
+\else
+\privatecvfalse
+\fi
 
 % Override awesome-cv fonts to use Arabic font (FreeSerif) everywhere
 \let\headerfont\arabicfont
@@ -74,12 +80,15 @@
 }
 \name{\textarabic{بطاهر}}{\textarabic{سمير}}
 \email{contact@samir-bettahar.dev}
-\extrainfo{\href{https://wa.me/213000000000}{\faWhatsapp\acvHeaderIconSep\textenglish{(+213) 000 00 00 00}}}
-\address{\textarabic{مدينة، البلد}}
 \github{samir1498}
 \linkedin{samir-bettahar}
 \homepage{samir-bettahar.dev}
-\photo[circle,edge,right]{me.jpeg}
+\ifprivatecv
+\input{private-vars.tex}
+\privateExtraInfoAr
+\address{\privateAddressAr}
+\photo[circle,edge,right]{\privatePhotoFile}
+\fi
 \position{\textarabic{مهندس برمجيات}}
 
 \begin{document}

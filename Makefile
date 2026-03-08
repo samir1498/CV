@@ -1,53 +1,72 @@
-# Awesome CV Makefile
-# Builds French and English versions to separate output folders
-
 LATEX = xelatex
 LATEXFLAGS = -interaction=nonstopmode -halt-on-error
 
-# Source files
 CV_FR = Bettahar-Samir-CV.tex
 CV_EN = Bettahar-Samir-Resume.tex
 CV_AR = Bettahar-Samir-Ar-CV.tex
 
-# Output directories
 OUT_DIR = output
 OUT_FR = $(OUT_DIR)/fr
 OUT_EN = $(OUT_DIR)/en
 OUT_AR = $(OUT_DIR)/ar
 
-# Output filenames
 PDF_FR = $(OUT_FR)/Bettahar-Samir-CV.pdf
 PDF_EN = $(OUT_EN)/Bettahar-Samir-Resume.pdf
 PDF_AR = $(OUT_AR)/Bettahar-Samir-Ar-CV.pdf
+PRIVATE_VARS = private-vars.tex
 
-.PHONY: all fr en ar clean help
+PRIVATE ?= 0
 
-all: fr en ar
-	@echo "✓ All CVs built successfully"
+.PHONY: all public private check-private-vars fr en ar clean help
 
-fr: $(PDF_FR)
+all: public
+
+public: PRIVATE=0
+public: fr en ar
+	@echo "✓ Public CVs built successfully"
+
+private: PRIVATE=1
+private: check-private-vars fr en ar
+	@echo "✓ Private CVs built successfully"
+
+check-private-vars:
+	@if [ ! -f "$(PRIVATE_VARS)" ]; then \
+		echo "Missing $(PRIVATE_VARS). Copy private-vars.example.tex to $(PRIVATE_VARS) and set private values."; \
+		exit 1; \
+	fi
+
+fr:
+	@mkdir -p $(OUT_FR)
+	@if [ "$(PRIVATE)" = "1" ]; then \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-CV -output-directory=$(OUT_FR) "\\def\\isprivatecv{1}\\input{$(CV_FR)}"; \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-CV -output-directory=$(OUT_FR) "\\def\\isprivatecv{1}\\input{$(CV_FR)}"; \
+	else \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-CV -output-directory=$(OUT_FR) $(CV_FR); \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-CV -output-directory=$(OUT_FR) $(CV_FR); \
+	fi
 	@echo "✓ French CV built: $(PDF_FR)"
 
-en: $(PDF_EN)
+en:
+	@mkdir -p $(OUT_EN)
+	@if [ "$(PRIVATE)" = "1" ]; then \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-Resume -output-directory=$(OUT_EN) "\\def\\isprivatecv{1}\\input{$(CV_EN)}"; \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-Resume -output-directory=$(OUT_EN) "\\def\\isprivatecv{1}\\input{$(CV_EN)}"; \
+	else \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-Resume -output-directory=$(OUT_EN) $(CV_EN); \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-Resume -output-directory=$(OUT_EN) $(CV_EN); \
+	fi
 	@echo "✓ English CV built: $(PDF_EN)"
 
-ar: $(PDF_AR)
-	@echo "✓ Arabic CV built: $(PDF_AR)"
-
-$(PDF_FR): $(CV_FR) awesome-cv.cls sections/fr/*.tex
-	@mkdir -p $(OUT_FR)
-	$(LATEX) $(LATEXFLAGS) -output-directory=$(OUT_FR) $(CV_FR)
-	$(LATEX) $(LATEXFLAGS) -output-directory=$(OUT_FR) $(CV_FR)
-
-$(PDF_EN): $(CV_EN) awesome-cv.cls sections/en/*.tex
-	@mkdir -p $(OUT_EN)
-	$(LATEX) $(LATEXFLAGS) -output-directory=$(OUT_EN) $(CV_EN)
-	$(LATEX) $(LATEXFLAGS) -output-directory=$(OUT_EN) $(CV_EN)
-
-$(PDF_AR): $(CV_AR) awesome-cv.cls sections/ar/*.tex
+ar:
 	@mkdir -p $(OUT_AR)
-	$(LATEX) $(LATEXFLAGS) -output-directory=$(OUT_AR) $(CV_AR)
-	$(LATEX) $(LATEXFLAGS) -output-directory=$(OUT_AR) $(CV_AR)
+	@if [ "$(PRIVATE)" = "1" ]; then \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-Ar-CV -output-directory=$(OUT_AR) "\\def\\isprivatecv{1}\\input{$(CV_AR)}"; \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-Ar-CV -output-directory=$(OUT_AR) "\\def\\isprivatecv{1}\\input{$(CV_AR)}"; \
+	else \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-Ar-CV -output-directory=$(OUT_AR) $(CV_AR); \
+		$(LATEX) $(LATEXFLAGS) -jobname=Bettahar-Samir-Ar-CV -output-directory=$(OUT_AR) $(CV_AR); \
+	fi
+	@echo "✓ Arabic CV built: $(PDF_AR)"
 
 clean:
 	@rm -rf $(OUT_DIR)
@@ -56,8 +75,10 @@ clean:
 
 help:
 	@echo "Available targets:"
-	@echo "  make all   - Build all CV versions"
-	@echo "  make fr    - Build French CV only"
-	@echo "  make en    - Build English CV only"
-	@echo "  make ar    - Build Arabic CV only"
-	@echo "  make clean - Remove all generated files"
+	@echo "  make public  - Build public CV set (default)"
+	@echo "  make private - Build private CV set (shows phone/address/photo)"
+	@echo "                 requires private-vars.tex (copy from private-vars.example.tex)"
+	@echo "  make fr      - Build French CV only"
+	@echo "  make en      - Build English CV only"
+	@echo "  make ar      - Build Arabic CV only"
+	@echo "  make clean   - Remove all generated files"

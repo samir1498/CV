@@ -5,3 +5,7 @@ output
 *.aux
 *.pdf
 *.gz
+private-vars.tex
+private-photo.jpg
+private-photo.png
+me.jpeg

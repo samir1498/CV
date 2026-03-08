@@ -1,0 +1,29 @@
+name: cv-ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y make texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-lang-arabic fonts-freefont-otf
+
+      - name: Build public CVs
+        run: make public
+
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs-${{ github.sha }}
+          path: |
+            output/en/Bettahar-Samir-Resume.pdf
+            output/fr/Bettahar-Samir-CV.pdf
+            output/ar/Bettahar-Samir-Ar-CV.pdf
