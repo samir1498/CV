@@ -70,18 +70,6 @@ Private mode (`make private`):
 
 - Loads WhatsApp, address, and photo path from local `private-vars.tex` (not tracked)
 
-## Portfolio Sync
-
-Build public PDFs and copy them to the portfolio static folder:
-
-```bash
-./scripts/sync-to-portfolio.sh
-```
-
-Target folder expected:
-
-- `$HOME/developer/personal/portfolio/public/cv`
-
 ## CI and Releases
 
 - Pull requests and pushes are validated by GitHub Actions build workflow.
