@@ -1,6 +1,7 @@
 name: cv-ci
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
