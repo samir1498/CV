@@ -87,7 +87,7 @@ release: public
 
 clean:
 	@rm -rf $(OUT_DIR)
-	@rm -f *.aux *.log *.out *.fls *.fdb_latexmk *.synctex.gz
+	@find . -maxdepth 2 -type f \( -name "*.aux" -o -name "*.log" -o -name "*.out" -o -name "*.fls" -o -name "*.fdb_latexmk" -o -name "*.synctex.gz" \) -delete 2>/dev/null || true
 	@echo "✓ Cleaned all build artifacts"
 
 help:
