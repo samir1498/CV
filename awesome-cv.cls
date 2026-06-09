@@ -75,9 +75,11 @@
 % Needed to use icons from font-awesome
 % (https://github.com/posquit0/latex-fontawesome)
 \RequirePackage{fontawesome}
-\RequirePackage[default,opentype]{sourcesanspro}
+\RequirePackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
 % Needed for the photo ID
-\RequirePackage[skins]{tcolorbox}
+\RequirePackage{tikz}
+\usetikzlibrary{shapes,calc}
 % Needed to deal a paragraphs
 \RequirePackage{parskip}
 % Needed to deal hyperlink
@@ -179,9 +181,9 @@
   BoldItalicFont=*-MediumItalic,
 ]{Roboto}
 
-\newcommand*{\footerfont}{\sourcesanspro}
-\newcommand*{\bodyfont}{\sourcesanspro}
-\newcommand*{\bodyfontlight}{\sourcesansprolight}
+\newcommand*{\footerfont}{\headerfontlight}
+\newcommand*{\bodyfont}{\headerfont}
+\newcommand*{\bodyfontlight}{\headerfontlight}
 
 %-------------------------------------------------------------------------------
 %                Configuration for styles
@@ -430,7 +432,7 @@
         {\def\@photoborder{darkgray}}%
         {\def\@photoborder{none}}%
       \begin{tikzpicture}%
-        \node[\@photoshape, draw=\@photoborder, line width=0.3mm, inner sep=\photodim, fill overzoom image=\@photo] () {};
+        \node[\@photoshape, draw=\@photoborder, line width=0.3mm, inner sep=0pt, minimum size=\photodim*2] {\includegraphics[width=\photodim*2,height=\photodim*2]{\@photo}};
       \end{tikzpicture}
     }%
   }
