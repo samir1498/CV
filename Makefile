@@ -17,7 +17,7 @@ PRIVATE_VARS = private-vars.tex
 
 PRIVATE ?= 0
 
-.PHONY: all public private check-private-vars fr en ar clean help
+.PHONY: all public private check-private-vars fr en ar clean release help
 
 all: public
 
@@ -68,6 +68,23 @@ ar:
 	fi
 	@echo "✓ Arabic CV built: $(PDF_AR)"
 
+release: public
+	@echo "🚀 Creating GitHub release..."
+	@LATEST=$$(gh release list --repo samir1498/CV --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || echo "v0.0.0"); \
+	echo "  Latest tag: $$LATEST"; \
+	NEW_VERSION=$$(echo "$$LATEST" | awk -F. -v OFS=. '{$$NF++;print}'); \
+	read -p "  Enter version [$$NEW_VERSION]: " VERSION; \
+	VERSION=$${VERSION:-$$NEW_VERSION}; \
+	echo "  Creating release $$VERSION..."; \
+	gh release create "$$VERSION" \
+		--repo samir1498/CV \
+		--title "$$VERSION" \
+		--generate-notes \
+		$(PDF_FR)#"CV (FR)" \
+		$(PDF_EN)#"CV (EN)" \
+		$(PDF_AR)#"CV (AR)"; \
+	echo "✓ Release $$VERSION created successfully"
+
 clean:
 	@rm -rf $(OUT_DIR)
 	@rm -f *.aux *.log *.out *.fls *.fdb_latexmk *.synctex.gz
@@ -81,4 +98,5 @@ help:
 	@echo "  make fr      - Build French CV only"
 	@echo "  make en      - Build English CV only"
 	@echo "  make ar      - Build Arabic CV only"
+	@echo "  make release - Build public CVs and create a GitHub Release with the PDFs"
 	@echo "  make clean   - Remove all generated files"
