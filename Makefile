@@ -1,5 +1,6 @@
 LATEX = xelatex
 LATEXFLAGS = -interaction=nonstopmode -halt-on-error
+export TEXINPUTS := .:vendor:./vendor//:
 
 CV_FR = Bettahar-Samir-CV.tex
 CV_EN = Bettahar-Samir-Resume.tex
