@@ -11,10 +11,10 @@
 \setmainlanguage[numerals=maghrib]{arabic}
 \setotherlanguage{english}
 
-% Set Arabic fonts with Italic mapped to Regular (since FreeSerif Italic lacks Arabic glyphs)
-\newfontfamily\arabicfont[Script=Arabic, Scale=1.1, ItalicFont=FreeSerif]{FreeSerif}
-\newfontfamily\arabicfontsf[Script=Arabic, Scale=1.1, ItalicFont=FreeSerif]{FreeSerif}
-\newfontfamily\arabicfonttt[Script=Arabic, Scale=1.1, ItalicFont=FreeSerif]{FreeSerif}
+% Set Arabic fonts with PakType Naskh Basic (supports Arabic script natively)
+\newfontfamily\arabicfont[Script=Arabic, Scale=1.1]{PakType Naskh Basic}
+\newfontfamily\arabicfontsf[Script=Arabic, Scale=1.1]{PakType Naskh Basic}
+\newfontfamily\arabicfonttt[Script=Arabic, Scale=1.1]{PakType Naskh Basic}
 
 \colorlet{awesome}{awesome-skyblue}
 \setbool{acvSectionColorHighlight}{false}
@@ -26,7 +26,7 @@
 \privatecvfalse
 \fi
 
-% Override awesome-cv fonts to use Arabic font (FreeSerif) everywhere
+% Override awesome-cv fonts to use Arabic font everywhere
 \let\headerfont\arabicfont
 \let\headerfontlight\arabicfont
 \let\footerfont\arabicfont
