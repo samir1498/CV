@@ -39,7 +39,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ matrix.lang.out }}/${{ matrix.lang.file }}
-          key: cv-${{ matrix.lang.target }}-${{ hashFiles('awesome-cv.cls', matrix.lang.tex, 'sections/' + matrix.lang.target + '/**') }}
+          key: cv-${{ matrix.lang.target }}-${{ hashFiles('awesome-cv.cls', 'sections/**') }}
 
       - name: Install tools
         if: steps.cache.outputs.cache-hit != 'true'
