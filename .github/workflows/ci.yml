@@ -17,33 +17,45 @@ jobs:
       matrix:
         lang:
           - target: fr
+            tex: Bettahar-Samir-CV.tex
             file: Bettahar-Samir-CV.pdf
             out: output/fr
           - target: en
+            tex: Bettahar-Samir-Resume.tex
             file: Bettahar-Samir-Resume.pdf
             out: output/en
           - target: ar
+            tex: Bettahar-Samir-Ar-CV.tex
             file: Bettahar-Samir-Ar-CV.pdf
             out: output/ar
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Cache PDF
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ matrix.lang.out }}/${{ matrix.lang.file }}
+          key: cv-${{ matrix.lang.target }}-${{ hashFiles('awesome-cv.cls', matrix.lang.tex, 'sections/' + matrix.lang.target + '/**') }}
+
       - name: Install tools
+        if: steps.cache.outputs.cache-hit != 'true'
         run: apt-get update && apt-get install -y make fonts-freefont-otf fonts-paktype 2>/dev/null || true
 
       - name: Build ${{ matrix.lang.target }} CV
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p ${{ matrix.lang.out }}
           if [ "${{ matrix.lang.target }}" = "ar" ]; then
             xelatex -interaction=nonstopmode -halt-on-error \
               -jobname=Bettahar-Samir-Ar-CV \
-              -output-directory=output/ar \
-              '\let\UseMathForPositioningText\relax\input{Bettahar-Samir-Ar-CV.tex}'
+              -output-directory=${{ matrix.lang.out }} \
+              '\let\UseMathForPositioningText\relax\input{${{ matrix.lang.tex }}}'
             xelatex -interaction=nonstopmode -halt-on-error \
               -jobname=Bettahar-Samir-Ar-CV \
-              -output-directory=output/ar \
-              '\let\UseMathForPositioningText\relax\input{Bettahar-Samir-Ar-CV.tex}'
+              -output-directory=${{ matrix.lang.out }} \
+              '\let\UseMathForPositioningText\relax\input{${{ matrix.lang.tex }}}'
           else
             make ${{ matrix.lang.target }}
           fi

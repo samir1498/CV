@@ -9,38 +9,83 @@ permissions:
   contents: write
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
     container:
       image: texlive/texlive:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lang:
+          - target: fr
+            tex: Bettahar-Samir-CV.tex
+            file: Bettahar-Samir-CV.pdf
+            out: output/fr
+          - target: en
+            tex: Bettahar-Samir-Resume.tex
+            file: Bettahar-Samir-Resume.pdf
+            out: output/en
+          - target: ar
+            tex: Bettahar-Samir-Ar-CV.tex
+            file: Bettahar-Samir-Ar-CV.pdf
+            out: output/ar
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Cache PDF
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ matrix.lang.out }}/${{ matrix.lang.file }}
+          key: cv-${{ matrix.lang.target }}-${{ hashFiles('awesome-cv.cls', matrix.lang.tex, 'sections/' + matrix.lang.target + '/**') }}
+
       - name: Install tools
+        if: steps.cache.outputs.cache-hit != 'true'
         run: apt-get update && apt-get install -y make fonts-freefont-otf fonts-paktype 2>/dev/null || true
 
-      - name: Build French CV
-        run: make fr
-      - name: Build English CV
-        run: make en
-      - name: Build Arabic CV
+      - name: Build ${{ matrix.lang.target }} CV
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          mkdir -p output/ar
-          xelatex -interaction=nonstopmode -halt-on-error \
-            -jobname=Bettahar-Samir-Ar-CV \
-            -output-directory=output/ar \
-            '\let\UseMathForPositioningText\relax\input{Bettahar-Samir-Ar-CV.tex}'
-          xelatex -interaction=nonstopmode -halt-on-error \
-            -jobname=Bettahar-Samir-Ar-CV \
-            -output-directory=output/ar \
-            '\let\UseMathForPositioningText\relax\input{Bettahar-Samir-Ar-CV.tex}'
+          mkdir -p ${{ matrix.lang.out }}
+          if [ "${{ matrix.lang.target }}" = "ar" ]; then
+            xelatex -interaction=nonstopmode -halt-on-error \
+              -jobname=Bettahar-Samir-Ar-CV \
+              -output-directory=${{ matrix.lang.out }} \
+              '\let\UseMathForPositioningText\relax\input{${{ matrix.lang.tex }}}'
+            xelatex -interaction=nonstopmode -halt-on-error \
+              -jobname=Bettahar-Samir-Ar-CV \
+              -output-directory=${{ matrix.lang.out }} \
+              '\let\UseMathForPositioningText\relax\input{${{ matrix.lang.tex }}}'
+          else
+            make ${{ matrix.lang.target }}
+          fi
+
+      - name: Upload ${{ matrix.lang.target }} artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-${{ matrix.lang.target }}-${{ github.sha }}
+          path: ${{ matrix.lang.out }}/${{ matrix.lang.file }}
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all PDFs
+        uses: actions/download-artifact@v4
+        with:
+          pattern: cv-*-${{ github.sha }}
+          merge-multiple: true
 
       - name: Publish release assets
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
           files: |
-            output/en/Bettahar-Samir-Resume.pdf
-            output/fr/Bettahar-Samir-CV.pdf
-            output/ar/Bettahar-Samir-Ar-CV.pdf
+            Bettahar-Samir-Resume.pdf
+            Bettahar-Samir-CV.pdf
+            Bettahar-Samir-Ar-CV.pdf
