@@ -15,11 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y make texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-lang-arabic fonts-freefont-otf
-
       - name: Build public CVs
-        run: make public
+        uses: xu-cheng/texlive-action@v3
+        with:
+          run: |
+            apk add make
+            make public
 
       - name: Publish release assets
         uses: softprops/action-gh-release@v2
