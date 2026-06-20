@@ -10,21 +10,46 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lang:
+          - target: fr
+            file: Bettahar-Samir-CV.pdf
+            out: output/fr
+          - target: en
+            file: Bettahar-Samir-Resume.pdf
+            out: output/en
+          - target: ar
+            file: Bettahar-Samir-Ar-CV.pdf
+            out: output/ar
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y make texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-lang-arabic fonts-freefont-otf
+      - name: Install tools
+        run: apt-get update && apt-get install -y make fonts-freefont-otf fonts-paktype 2>/dev/null || true
 
-      - name: Build public CVs
-        run: make public
+      - name: Build ${{ matrix.lang.target }} CV
+        run: |
+          mkdir -p ${{ matrix.lang.out }}
+          if [ "${{ matrix.lang.target }}" = "ar" ]; then
+            xelatex -interaction=nonstopmode -halt-on-error \
+              -jobname=Bettahar-Samir-Ar-CV \
+              -output-directory=output/ar \
+              '\let\UseMathForPositioningText\relax\input{Bettahar-Samir-Ar-CV.tex}'
+            xelatex -interaction=nonstopmode -halt-on-error \
+              -jobname=Bettahar-Samir-Ar-CV \
+              -output-directory=output/ar \
+              '\let\UseMathForPositioningText\relax\input{Bettahar-Samir-Ar-CV.tex}'
+          else
+            make ${{ matrix.lang.target }}
+          fi
 
-      - name: Upload PDF artifacts
+      - name: Upload ${{ matrix.lang.target }} PDF
         uses: actions/upload-artifact@v4
         with:
-          name: cv-pdfs-${{ github.sha }}
-          path: |
-            output/en/Bettahar-Samir-Resume.pdf
-            output/fr/Bettahar-Samir-CV.pdf
-            output/ar/Bettahar-Samir-Ar-CV.pdf
+          name: cv-${{ matrix.lang.target }}-${{ github.sha }}
+          path: ${{ matrix.lang.out }}/${{ matrix.lang.file }}
