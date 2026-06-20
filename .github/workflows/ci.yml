@@ -17,8 +17,10 @@ jobs:
       - name: Build public CVs
         uses: xu-cheng/texlive-action@v3
         with:
+          os: debian
           run: |
-            apk add make
+            apt-get update -qq
+            apt-get install -y -qq make fonts-freefont-otf paktype-naskh-basic-fonts
             make public
 
       - name: Upload PDF artifacts
