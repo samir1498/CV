@@ -673,15 +673,15 @@
 
 % Define an environment for cvitems(for cventry)
 \newenvironment{cvitems}{%
-  
+  \vspace{-1.5mm}
   \begin{justify}
-  \begin{itemize}[leftmargin=2ex, nosep, itemsep=0.5ex]
+  \begin{itemize}[leftmargin=2ex, nosep, itemsep=0.3ex]
     \setlength{\parskip}{0pt}
     \renewcommand{\labelitemi}{\bullet}
 }{%
   \end{itemize}
   \end{justify}
-  
+  \vspace{-1.0mm}
 }
 
 

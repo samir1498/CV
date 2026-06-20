@@ -11,15 +11,30 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y make texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-lang-arabic fonts-freefont-otf
+      - name: Install tools
+        run: apt-get update && apt-get install -y make fonts-freefont-otf fonts-paktype 2>/dev/null || true
 
-      - name: Build public CVs
-        run: make public
+      - name: Build French CV
+        run: make fr
+      - name: Build English CV
+        run: make en
+      - name: Build Arabic CV
+        run: |
+          mkdir -p output/ar
+          xelatex -interaction=nonstopmode -halt-on-error \
+            -jobname=Bettahar-Samir-Ar-CV \
+            -output-directory=output/ar \
+            '\let\UseMathForPositioningText\relax\input{Bettahar-Samir-Ar-CV.tex}'
+          xelatex -interaction=nonstopmode -halt-on-error \
+            -jobname=Bettahar-Samir-Ar-CV \
+            -output-directory=output/ar \
+            '\let\UseMathForPositioningText\relax\input{Bettahar-Samir-Ar-CV.tex}'
 
       - name: Publish release assets
         uses: softprops/action-gh-release@v2
